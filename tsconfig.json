@@ -1,0 +1,21 @@
+{
+    "include": ["./src/main/ts/**/*.mts"],
+    "compilerOptions":
+    {
+      "declaration": false,
+      "declarationMap": false,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "lib": ["es2022"],
+      "module": "es2022",
+      "moduleResolution": "node",
+      "noEmitOnError": true,
+      "noImplicitOverride": true,
+      "outDir": "./build",
+      "removeComments": true,
+      "rootDir": "./src/main/ts",
+      "sourceMap": true,
+      "strict": true,
+      "target": "es2022"
+    }
+  }
