@@ -1,6 +1,7 @@
 **/.DS_Store
 build
 node_modules
+README_SPEC.md
 .idea
 .vscode
 .project
