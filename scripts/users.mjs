@@ -2,7 +2,7 @@ import { randomIds } from "./util.mjs";
 import { Types } from "mongoose";
 const { ObjectId } = Types;
 
-export const users = Object.freeze([
+const friendlessUsers = Object.freeze([
     { _id: new ObjectId(), username: "user1", email: "user1@example.com", thoughts: randomIds(10) },
     { _id: new ObjectId(), username: "user2", email: "user2@example.com", thoughts: randomIds(10) },
     { _id: new ObjectId(), username: "user3", email: "user3@example.com", thoughts: randomIds(10) },
@@ -14,3 +14,12 @@ export const users = Object.freeze([
     { _id: new ObjectId(), username: "user9", email: "user9@example.com", thoughts: randomIds(10) },
     { _id: new ObjectId(), username: "user10", email: "user10@example.com", thoughts: randomIds(10) }
 ]);
+
+export const users = friendlessUsers
+    .map((user, index) => ({
+        ...user,
+        friends: friendlessUsers
+            .filter((_, _index) => index !== _index)
+            .map(friendlessUser => friendlessUser._id).splice(0, Math.random() * (friendlessUsers.length - 1))
+        })
+    );
