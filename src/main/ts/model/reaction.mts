@@ -18,6 +18,7 @@ type ReactionModel = Model<IReaction, {}, IReactionMethods>;
 
 export const reactionSchema = new Schema<IReaction, ReactionModel, IReactionMethods>({
     reactionId: {
+        type: Schema.Types.ObjectId,
         alias: "_id"
     },
     reactionBody: {
