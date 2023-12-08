@@ -1,26 +1,16 @@
 import { users } from "./users.mjs";
 import { reactions } from "./reactions.mjs";
-import mongoose from "mongoose";
-const { ObjectId } = mongoose.Types;
+import { getRandomDate } from "./util.mjs";
 
-const generateThoughtsArray = (numItems) => {
-    const array = [];
+const reactionsCopy = Array.from(reactions);
 
-    for (let i = 0; i < numItems; i++) {
-      const createdAt = new Date(Date.now() - Math.floor(Math.random() * 10000000000)); // Random date in the past
-      const updatedAt = new Date(createdAt.getTime() + Math.floor(Math.random() * 1000000000)); // Random date after createdAt
-
-      array.push({
-        _id: new ObjectId(),
-        thoughtText: `Thought ${i + 1}`,
-        user: users[i]._id,
-        reactions: [reactions[i]],
-        createdAt: createdAt,
-        updatedAt: updatedAt
-      });
-    }
-
-    return array;
-  }
-
-  export const thoughts = generateThoughtsArray(10);
+export const thoughts = users.flatMap(user => {
+    return user.thoughts.map((thoughtId, index) => {
+        const thoughtText = `Thought ${index + 1} by ${user.username}`;
+        const thoughtUser = user._id;
+        const thoughtReactions = reactionsCopy.splice(0, Math.floor(Math.random() * Math.floor(reactionsCopy.length / 4)));
+        const createdAt = getRandomDate(new Date(2020, 0, 1), new Date());
+        const updatedAt = getRandomDate(createdAt, new Date());
+        return { _id: thoughtId, thoughtText, user: thoughtUser, reactions: thoughtReactions, createdAt, updatedAt };
+    });
+});
