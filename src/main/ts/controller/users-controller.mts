@@ -1,5 +1,5 @@
 import { User } from "../model/user.mjs";
-import type { Request, Response } from 'express';
+import type { Request, Response } from "express";
 
 export const usersGetRequest = async (req: Request, res: Response) =>
 {
