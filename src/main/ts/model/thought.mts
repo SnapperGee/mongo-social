@@ -6,6 +6,7 @@ interface IThought
     thoughtText: string;
     user: Schema.Types.ObjectId;
     reactions: IReaction[];
+    reactionCount?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -39,6 +40,11 @@ thoughtSchema.methods.formattedTimeStamp = function(): string
 {
     return this.createdAt!.toLocaleDateString();
 }
+
+thoughtSchema.virtual("reactionCount").get(function(): number
+{
+    return this.reactions.length;
+});
 
 export const User = model<IThought, ThoughtModel>("Thought", thoughtSchema);
 
