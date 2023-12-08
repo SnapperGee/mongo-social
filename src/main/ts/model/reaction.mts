@@ -1,4 +1,4 @@
-import { Model, Schema } from "mongoose";
+import { Model, Schema, Types } from "mongoose";
 
 export interface IReaction
 {
@@ -18,7 +18,8 @@ type ReactionModel = Model<IReaction, {}, IReactionMethods>;
 
 export const reactionSchema = new Schema<IReaction, ReactionModel, IReactionMethods>({
     reactionId: {
-        alias: "_id"
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
     },
     reactionBody: {
         type: String,
