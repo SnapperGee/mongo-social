@@ -17,7 +17,7 @@ for (let index = 0; index < Math.floor(Math.random() * (MAX_NUM_REACTIONS - MIN_
 
     const reactionBody = `Reaction ${reactions.filter(_reaction => _reaction.user === randomUser._id).length + 1} by ${randomUser.username}`;
 
-    const reaction = { reactionId: new ObjectId(), user: randomUser._id, reactionBody, createdAt, updatedAt };
+    const reaction = { _id: new ObjectId(), user: randomUser._id, reactionBody, createdAt, updatedAt };
 
     reactions.push(reaction);
 };
