@@ -2,7 +2,7 @@
   "name": "mongo-social",
   "version": "0.0.1",
   "description": "Social network app API endpoints.",
-  "main": "./build/server.mjs",
+  "main": "./build/index.mjs",
   "type": "module",
   "private": true,
   "repository": {
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
-    "start": "node --enable-source-maps ./build/server.mjs"
+    "start": "node --enable-source-maps ./build/index.mjs"
   },
   "author": "Snap <XxSnapperGeexX@gmail.com> (https://github.com/SnapperGee)",
   "license": "ISC",
