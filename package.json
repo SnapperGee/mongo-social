@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
+    "drop-db": "node ./scripts/drop-database.mjs",
     "seed": "node ./scripts/seed.mjs",
     "start": "node --enable-source-maps ./build/index.mjs"
   },

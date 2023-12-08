@@ -9,6 +9,7 @@ connection.once("open", async () => {
     {
         await User.insertMany(users);
         await Thought.insertMany(thoughts);
+        console.log("Database seeded.\nClosing connection...");
         await connection.close();
     }
     catch(err)
