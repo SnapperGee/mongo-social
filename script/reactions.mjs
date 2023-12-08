@@ -8,7 +8,7 @@ const MAX_NUM_REACTIONS = 400;
 
 export const reactions = [];
 
-for (let index = 0; index < Math.floor(Math.random() * (MAX_NUM_REACTIONS - MIN_NUM_REACTIONS) + MIN_NUM_REACTIONS); index++)
+for (let index = 0; index < Math.floor(Math.random() * (MAX_NUM_REACTIONS - MIN_NUM_REACTIONS) + MIN_NUM_REACTIONS); ++index)
 {
     const randomUser = users[Math.floor(Math.random() * users.length)];
 
