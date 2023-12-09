@@ -9,14 +9,9 @@ export interface IReaction
     updatedAt?: Date;
 }
 
-interface IReactionMethods
-{
+type ReactionModel = Model<IReaction, {}>;
 
-}
-
-type ReactionModel = Model<IReaction, {}, IReactionMethods>;
-
-export const reactionSchema = new Schema<IReaction, ReactionModel, IReactionMethods>({
+export const reactionSchema = new Schema<IReaction, ReactionModel>({
     reactionId: {
         type: Schema.Types.ObjectId,
         alias: "_id"

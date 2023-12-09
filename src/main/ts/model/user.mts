@@ -9,14 +9,9 @@ interface IUser
     friends: Schema.Types.ObjectId[];
 }
 
-interface IUserMethods
-{
+type UserModel = Model<IUser, {}>;
 
-}
-
-type UserModel = Model<IUser, {}, IUserMethods>;
-
-const userSchema = new Schema<IUser, UserModel, IUserMethods>({
+const userSchema = new Schema<IUser, UserModel>({
     username: {
         type: String,
         unique: true,
