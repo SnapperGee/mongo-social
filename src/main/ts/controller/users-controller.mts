@@ -210,7 +210,10 @@ export const deleteUser = async (req: Request, res: Response) =>
     try
     {
         const deletedUser = await User.findByIdAndDelete(id);
-        res.json(deletedUser);
+
+        const deletedThoughts = await Thought.deleteMany({user: id});
+
+        res.json({deletedUser, deletedThoughts});
     }
     catch (error)
     {
