@@ -23,6 +23,11 @@ export const getAllUsers = async (req: Request, res: Response) =>
 
 export const getUserById = async (req: Request, res: Response) =>
 {
+    if ( ! isValidId(req.params.id))
+    {
+        return res.status(422).json({message: `Malformed user ID: "${req.params.id}"`});
+    }
+
     try
     {
         const users = await User.findById(req.params.id).select("-__v")
@@ -192,3 +197,24 @@ export const updateUser = async (req: Request, res: Response) =>
         return res.status(500).json(error);
     }
 };
+
+export const deleteUser = async (req: Request, res: Response) =>
+{
+    const id = req.params.id;
+
+    if ( ! isValidId(id))
+    {
+        return res.status(422).json({message: `Malformed user ID: "${id}"`});
+    }
+
+    try
+    {
+        const deletedUser = await User.findByIdAndDelete(id);
+        res.json(deletedUser);
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
+}
