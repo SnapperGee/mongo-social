@@ -1,3 +1,4 @@
+import { Thought } from "./thought.mjs";
 import { Model, Schema, model } from "mongoose";
 import isEmail from "validator/lib/isEmail.js";
 
@@ -30,7 +31,7 @@ const userSchema = new Schema<IUser, UserModel>({
     thoughts: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Thought"
+            ref: Thought
         }
     ],
     friends: [
