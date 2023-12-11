@@ -199,4 +199,4 @@ export const deleteThought = async (req: Request, res: Response) =>
         console.error(error);
         return res.status(500).json(error);
     }
-}
+};
