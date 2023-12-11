@@ -6,6 +6,6 @@ export const thoughtRoute = Router();
 thoughtRoute.get("/thoughts/:id", getThoughtById);
 thoughtRoute.get("/thoughts", getAllThoughts);
 
-thoughtRoute.put("/thoughts", createThought);
+thoughtRoute.post("/thoughts", createThought);
 
 export default thoughtRoute;
