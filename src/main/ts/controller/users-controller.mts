@@ -97,6 +97,11 @@ export const updateUser = async (req: Request, res: Response) =>
         return res.status(400).json({message: "User ID is required."});
     }
 
+    if ( ! isValidId(id))
+    {
+        return res.status(422).json({message: `Malformed user ID: "${id}"`});
+    }
+
     if ( ! await User.exists({_id: id}))
     {
         return res.status(404).json({message: "Invalid User ID."});
