@@ -1,9 +1,11 @@
-import { getAllThoughts, getThoughtById } from "../../controller/thoughts-controller.mjs";
+import { getAllThoughts, getThoughtById, createThought } from "../../controller/thoughts-controller.mjs";
 import { Router } from "express";
 
 export const thoughtRoute = Router();
 
 thoughtRoute.get("/thoughts/:id", getThoughtById);
 thoughtRoute.get("/thoughts", getAllThoughts);
+
+thoughtRoute.put("/thoughts", createThought);
 
 export default thoughtRoute;
