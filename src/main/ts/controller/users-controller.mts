@@ -12,12 +12,12 @@ export const getAllUsers = async (req: Request, res: Response) =>
                                        .populate("thoughts", "-__v -user")
                                        .populate("friends", "-__v");
 
-        res.json(users);
+        return res.json(users);
     }
     catch(error)
     {
         console.error(error);
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -35,12 +35,12 @@ export const getUserById = async (req: Request, res: Response) =>
             .populate("thoughts", "-__v -user")
             .populate("friends", "-__v");
 
-        res.json(users);
+        return res.json(users);
     }
     catch(error)
     {
         console.error(error);
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -190,7 +190,8 @@ export const updateUser = async (req: Request, res: Response) =>
                 runValidators: true
             }
         );
-        res.json(updatedUser);
+
+        return res.json(updatedUser);
     }
     catch (error)
     {
@@ -216,7 +217,7 @@ export const deleteUser = async (req: Request, res: Response) =>
 
         const deletedThoughts = await Thought.deleteMany({user: id});
 
-        res.json({deletedUser, deletedThoughts, removedAsFriendFrom});
+        return res.json({deletedUser, deletedThoughts, removedAsFriendFrom});
     }
     catch (error)
     {

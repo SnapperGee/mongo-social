@@ -7,11 +7,11 @@ export const getAllThoughts = async (req: Request, res: Response) =>
     {
         const thoughts = await Thought.find().select("-__v")
                                              .populate("user", "-__v -thoughts");
-        res.json(thoughts);
+        return res.json(thoughts);
     }
     catch(error)
     {
         console.error(error);
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };

@@ -32,13 +32,21 @@ export const addFriendToUser = async (req: Request, res: Response) =>
         return res.status(500).json(error);
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $addToSet: {friends: friendId} },
-        { new: true }
-    );
+    try
+    {
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $addToSet: {friends: friendId} },
+            { new: true }
+        );
 
-    res.json(updatedUser);
+        return res.json(updatedUser);
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
 }
 
 export const deleteFriendFromUser = async (req: Request, res: Response) =>
@@ -70,11 +78,19 @@ export const deleteFriendFromUser = async (req: Request, res: Response) =>
         return res.status(500).json(error);
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $pull: {friends: friendId} },
-        { new: true }
-    );
+    try
+    {
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $pull: {friends: friendId} },
+            { new: true }
+        );
 
-    res.json(updatedUser);
+        return res.json(updatedUser);
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
 }
