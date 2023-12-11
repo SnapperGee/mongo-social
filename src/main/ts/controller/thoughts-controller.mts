@@ -176,3 +176,27 @@ export const updateThought = async (req: Request, res: Response) =>
         return res.status(500).json(error);
     }
 };
+
+export const deleteThought = async (req: Request, res: Response) =>
+{
+    const id = req.params.id;
+
+    if ( ! isValidId(id))
+    {
+        return res.status(422).json({message: `Malformed thought ID: "${id}"`});
+    }
+
+    try
+    {
+        const deletedThought = await Thought.findByIdAndDelete(id, { new: true });
+
+        const removedFromUser = await User.findByIdAndUpdate(deletedThought?.user, {$pull: { thoughts: id }}, { new: true });
+
+        return res.json({deletedThought, removedFromUser});
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
+}
