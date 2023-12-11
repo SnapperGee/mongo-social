@@ -85,3 +85,94 @@ export const createThought = async (req: Request, res: Response) =>
         return res.status(500).json(error);
     }
 };
+
+export const updateThought = async (req: Request, res: Response) =>
+{
+    const id = req.params.id;
+
+    if ( ! id)
+    {
+        return res.status(400).json({message: "Thought ID is required."});
+    }
+
+    if ( ! isValidId(id))
+    {
+        return res.status(422).json({message: `Malformed thought ID: "${id}"`});
+    }
+
+    try
+    {
+        if ( ! await Thought.exists({_id: id}))
+        {
+            return res.status(404).json({message: "Invalid thought ID."});
+        }
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
+
+    if (req.body.user)
+    {
+        return res.status(405).json({message: `Thought user cannot be changed."`});
+    }
+
+    if (req.body.reactions)
+    {
+        if ( ! (req.body.reactions instanceof Array))
+        {
+            return res.status(422).json({message: "Non array of reaction IDs."});
+        }
+
+        const invalidReactionsIdIndexes: readonly number[] = req.body.reactions.reduce(
+            (accumulator: number[], reactionId: string, index: number) =>
+            {
+                if ( ! isValidId(reactionId))
+                {
+                    accumulator.push(index);
+                }
+
+                return accumulator;
+            },
+            []
+        );
+
+        if (invalidReactionsIdIndexes.length !== 0)
+        {
+            return res.status(422).json({message: `Malformed reaction ID(s): "${invalidReactionsIdIndexes.map(index => req.body.reactions[index]).join('", "')}"`});
+        }
+
+        try
+        {
+            if (req.body.reactions.length !== 0 && await Thought.exists({_id: {$nin: req.body.reactions}}))
+            {
+                return res.status(404).json({message: "Invalid reaction ID(s)."});
+            }
+        }
+        catch (error)
+        {
+            console.error(error);
+            return res.status(500).json(error);
+        }
+    }
+
+    try
+    {
+        const updatedThought = await Thought.findByIdAndUpdate(
+            id,
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        return res.json(updatedThought);
+    }
+    catch (error)
+    {
+        console.error(error);
+        return res.status(500).json(error);
+    }
+};
