@@ -250,9 +250,11 @@ export const deleteUser = async (req: Request, res: Response) =>
     {
         const deletedUser = await User.findByIdAndDelete(id);
 
+        const removedAsFriendFrom = await User.updateMany({friends: id}, {$pull: {friends: id}});
+
         const deletedThoughts = await Thought.deleteMany({user: id});
 
-        res.json({deletedUser, deletedThoughts});
+        res.json({deletedUser, deletedThoughts, removedAsFriendFrom});
     }
     catch (error)
     {
