@@ -2,7 +2,7 @@ import { Model, Schema } from "mongoose";
 
 export interface IReaction
 {
-    reactionId: Schema.Types.ObjectId;
+    reactionId?: Schema.Types.ObjectId;
     reactionBody: string;
     user: Schema.Types.ObjectId;
     createdAt?: Date;
