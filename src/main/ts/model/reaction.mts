@@ -30,3 +30,5 @@ export const reactionSchema = new Schema<IReaction, ReactionModel>({
 {
     timestamps: true
 });
+
+reactionSchema.path("_id").select(false);
