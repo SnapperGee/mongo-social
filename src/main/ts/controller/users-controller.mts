@@ -224,7 +224,7 @@ export const deleteUser = async (req: Request, res: Response) =>
 
     try
     {
-        const deletedUser = await User.findByIdAndDelete(id);
+        const deletedUser = await User.findByIdAndDelete(id, { new: true });
 
         const removedAsFriendFrom = await User.updateMany({friends: id}, {$pull: {friends: id}});
 
