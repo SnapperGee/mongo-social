@@ -9,8 +9,8 @@ export const getAllUsers = async (req: Request, res: Response) =>
     try
     {
         const users = await User.find().select("-__v")
-            .populate("thoughts", "-__v -user")
-            .populate("friends", "-__v");
+                                       .populate("thoughts", "-__v -user")
+                                       .populate("friends", "-__v");
 
         res.json(users);
     }
@@ -30,7 +30,8 @@ export const getUserById = async (req: Request, res: Response) =>
 
     try
     {
-        const users = await User.findById(req.params.id).select("-__v")
+        const users = await User.findById(req.params.id)
+            .select("-__v")
             .populate("thoughts", "-__v -user")
             .populate("friends", "-__v");
 
