@@ -1,5 +1,5 @@
 import { getAllThoughts, getThoughtById, createThought, updateThought, deleteThought } from "../../controller/thoughts-controller.mjs";
-import { createReaction } from "../../controller/thoughts-reactions-controller.mjs";
+import { createReaction, deleteReaction } from "../../controller/thoughts-reactions-controller.mjs";
 import { Router } from "express";
 
 export const thoughtRoute = Router();
@@ -12,7 +12,7 @@ thoughtRoute.post("/thoughts", createThought);
 
 thoughtRoute.put("/thoughts/:id", updateThought);
 
-thoughtRoute.delete("/thoughts/:thoughtId/reactions");
+thoughtRoute.delete("/thoughts/:thoughtId/reactions", deleteReaction);
 thoughtRoute.delete("/thoughts/:id", deleteThought);
 
 export default thoughtRoute;
