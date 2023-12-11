@@ -181,7 +181,7 @@ export const updateUser = async (req: Request, res: Response) =>
 
         try
         {
-            if (await User.exists({_id: {$nin: req.body.friends}}))
+            if (req.body.friends.length !== 0 && await User.exists({_id: {$nin: req.body.friends}}))
             {
                 return res.status(404).json({message: "Invalid friend ID(s)."});
             }
