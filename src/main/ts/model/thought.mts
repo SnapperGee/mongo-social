@@ -33,7 +33,9 @@ const thoughtSchema = new Schema<IThought, ThoughtModel, IThoughtMethods>({
     reactions: [reactionSchema]
 },
 {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true},
+    id: false
 });
 
 thoughtSchema.methods.formattedTimeStamp = function(): string
