@@ -7,7 +7,7 @@ const isValidId = Types.ObjectId.isValid;
 export const createReaction = async (req: Request, res: Response) =>
 {
     const thoughtId = req.params.thoughtId;
-    const { reactionUser, reactionBody } = req.body;
+    const { userId, reactionBody } = req.body;
 
     if ( ! thoughtId)
     {
@@ -31,7 +31,7 @@ export const createReaction = async (req: Request, res: Response) =>
             return res.status(404).json({message: "Invalid thought ID."});
         }
 
-        if ( ! await User.exists({_id: reactionUser}))
+        if ( ! await User.exists({_id: userId}))
         {
             return res.status(404).json({message: "Invalid reaction user ID."});
         }
@@ -44,7 +44,7 @@ export const createReaction = async (req: Request, res: Response) =>
 
     try
     {
-        const newReaction = { reactionBody, user: reactionUser };
+        const newReaction = { reactionBody, user: userId };
 
         const thoughtWithNewReaction =
             await Thought.findByIdAndUpdate(thoughtId, {$push: {reactions: newReaction}}, {new: true}).select("-__v");
