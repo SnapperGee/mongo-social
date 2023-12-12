@@ -88,14 +88,21 @@ export const deleteFriendFromUser = async (req: Request, res: Response) =>
 
     try
     {
-        const updatedUser = await User.findByIdAndUpdate(
+        const friendDeletedFromSourceUser = await User.findByIdAndUpdate(
             userId,
             { $pull: {friends: friendId} },
             { new: true }
         )
         .select("-__v");
 
-        return res.json(updatedUser);
+        const friendDeletedFromTargetUser = await User.findByIdAndUpdate(
+            friendId,
+            { $pull: {friends: userId} },
+            { new: true }
+        )
+        .select("-__v");
+
+        return res.json({sourceUser: friendDeletedFromSourceUser, targetUser: friendDeletedFromTargetUser});
     }
     catch (error)
     {
