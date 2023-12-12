@@ -62,7 +62,7 @@ export const createThought = async (req: Request, res: Response) =>
 
     try
     {
-        if ( ! await User.exists({userId}))
+        if ( ! await User.exists({_id: userId}))
         {
             return res.status(409).json({message: "Invalid user ID."});
         }
