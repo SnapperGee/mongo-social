@@ -101,7 +101,7 @@ export const deleteReaction = async (req: Request, res: Response) =>
         const thoughtThatReactionWasDeletedFrom =
             await Thought.findOneAndUpdate(
                 {_id: thoughtId},
-                { $pull: {reactions: {reactionId: reactionId}} },
+                { $pull: {reactions: {_id: reactionId}} },
                 { new: true }
             )
             .select("-__v");
