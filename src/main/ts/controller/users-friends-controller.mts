@@ -34,14 +34,21 @@ export const addFriendToUser = async (req: Request, res: Response) =>
 
     try
     {
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedSourceUser = await User.findByIdAndUpdate(
             userId,
             { $addToSet: {friends: friendId} },
             { new: true }
         )
         .select("-__v");
 
-        return res.json(updatedUser);
+        const updatedTargetUser = await User.findByIdAndUpdate(
+            friendId,
+            { $addToSet: {friends: userId} },
+            { new: true }
+        )
+        .select("-__v");
+
+        return res.json({sourceUser: updatedSourceUser, targetUser: updatedTargetUser});
     }
     catch (error)
     {
