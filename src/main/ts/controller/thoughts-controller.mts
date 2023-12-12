@@ -76,7 +76,7 @@ export const createThought = async (req: Request, res: Response) =>
     try
     {
         const newThought = await Thought.create({thoughtText, user: userId});
-        const thoughtAddedToUser = await User.findByIdAndUpdate(userId, {$addToSet: {thoughts: newThought._id}}, {new: true});
+        const thoughtAddedToUser = await User.findByIdAndUpdate(userId, {$addToSet: {thoughts: newThought._id}}, {new: true}).select("-__v");
         return res.status(201).json({newThought, addedToUser: thoughtAddedToUser});
     }
     catch(error)
@@ -166,7 +166,8 @@ export const updateThought = async (req: Request, res: Response) =>
                 new: true,
                 runValidators: true
             }
-        );
+        )
+        .select("-__v");
 
         return res.json(updatedThought);
     }
@@ -188,9 +189,9 @@ export const deleteThought = async (req: Request, res: Response) =>
 
     try
     {
-        const deletedThought = await Thought.findByIdAndDelete(id, { new: true });
+        const deletedThought = await Thought.findByIdAndDelete(id, { new: true }).select("-__v");
 
-        const removedFromUser = await User.findByIdAndUpdate(deletedThought?.user, {$pull: { thoughts: id }}, { new: true });
+        const removedFromUser = await User.findByIdAndUpdate(deletedThought?.user, {$pull: { thoughts: id }}, { new: true }).select("-__v");
 
         return res.json({deletedThought, removedFromUser});
     }

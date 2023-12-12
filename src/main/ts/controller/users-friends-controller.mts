@@ -38,7 +38,8 @@ export const addFriendToUser = async (req: Request, res: Response) =>
             userId,
             { $addToSet: {friends: friendId} },
             { new: true }
-        );
+        )
+        .select("-__v");
 
         return res.json(updatedUser);
     }
@@ -84,7 +85,8 @@ export const deleteFriendFromUser = async (req: Request, res: Response) =>
             userId,
             { $pull: {friends: friendId} },
             { new: true }
-        );
+        )
+        .select("-__v");
 
         return res.json(updatedUser);
     }
