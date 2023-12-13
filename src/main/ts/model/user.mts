@@ -17,6 +17,7 @@ const userSchema = new Schema<IUser, UserModel>({
         type: String,
         unique: true,
         required: true,
+        minlength: [1, "Username must be at least 1 character."],
         trim: true
     },
     email: {
