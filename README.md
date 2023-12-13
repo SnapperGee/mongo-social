@@ -110,3 +110,33 @@ A **DELETE** request to this endpoint is used to remove a friend:
 
 - the request URL `userId` parameter provides the ID of the User the friend will be removed from.
 - the request URL `friendId` parameter provides the ID of the User to be removed as a friend.
+
+## Examples
+
+Below are links showing the type of requests that can be made to the endpoints and the type of data that's returned.
+
+- GET requests to get all *Users* and *Thoughts* -> [HERE][get-all] <-
+- GET requests to get single *User* and *Thought* by ID -> [HERE][get-single] <-
+- DELETE request to delete *User* by ID -> [HERE][delete-user] <-
+- DELETE request to delete *Thought* by ID -> [HERE][delete-thought] <-
+- DELETE request to delete *Reaction* by ID -> [HERE][delete-reaction] <-
+- POST requests to create *User*, *Thought*, and *Reaction* -> [HERE][create-user-thought-and-reaction]<-
+- POST and DELETE requests to add and delete *Friend* from User -> [HERE][add-and-delete-friend] <-
+- PUT request to update *User* -> [HERE][update-user] <-
+- PUT request to update *Thought* -> [HERE][update-thought] <-
+
+The source code for this application is written in TypeScript and needs to be built before the database can be seeded.
+The video below shows how to compile the source code, seed the database, and start the application via npm package
+scripts:
+
+[Build and seed database example](https://drive.google.com/file/d/1czN4xZitbzUuTJzfOIrC5dgtqOKlbray/view?usp=sharing "Build and seed database example")
+
+[get-all]: https://drive.google.com/file/d/1XdGeQhf6KLn32KwlCUYjmXYL8-6f3wD7/view?usp=sharing "Get all Users and Thoughts"
+[get-single]: https://drive.google.com/file/d/1UjudtVvCT3TBXvLefU5XTivGREXFb43y/view?usp=sharing "Get single User and Thought"
+[delete-user]: https://drive.google.com/file/d/1hxDWARXBT_Mj84_iHu8D8tQhUZNmjq-Q/view?usp=sharing "Delete User"
+[delete-thought]: https://drive.google.com/file/d/1FZOQ3sl1Ic6acaZB2YtVVbKo88yJRqI6/view?usp=sharing "Delete Thought"
+[delete-reaction]: https://drive.google.com/file/d/1A3y1R0HiHNW3ifL1rGxksneV9ZI-HFrh/view?usp=sharing "Delete Reaction"
+[create-user-thought-and-reaction]: https://drive.google.com/file/d/1s9R-B3iizOixT7eDZw-Vm9uWtCClC9pq/view?usp=sharing "Create User, Thought, and Reaction"
+[add-and-delete-friend]: https://drive.google.com/file/d/1s5ut0UHtTChN9yMcX5WY2gi05lfrWsjf/view?usp=sharing "Add and Delete Friend"
+[update-user]: https://drive.google.com/file/d/1jDjArrSc_RCHPHxhutXzRhoY6AwmiS_k/view?usp=sharing "Update User"
+[update-thought]: https://drive.google.com/file/d/1JBzRqaHyJkz09zItza1NG64AnILfIj5v/view?usp=sharing "Update Thought"
