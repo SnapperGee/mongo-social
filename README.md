@@ -36,7 +36,7 @@ used.
 ```typescript
 {
     reactionId: Schema.Types.ObjectId; // Alias to _id of Reaction document
-    reactionBody: string; // Required, must be between less than 281 characters
+    reactionBody: string; // Required, must be no more than 280 characters
     user: Schema.Types.ObjectId; // References User model, required. Specifies user Reaction is associated with
     createdAt: Date;
     updatedAt: Date;
@@ -57,7 +57,7 @@ A user can be interacted with via the following endpoints.
 
 #### `/api/users/:id`
 
-- A **GET** request to this endpoint get's the user with the ID provided via the request URL `id` parameter.
+- A **GET** request to this endpoint gets the user with the ID provided via the request URL `id` parameter.
 - A **PUT** request to this endpoint updates the user with the ID provided via the request URL `id` parameter.
   - the request body `username`, `email`, and `thoughts` property update each respective property of the user.
 - A **DELETE** request to this endpoint deletes the user with the ID provided via the request URL `id` parameter.
@@ -74,7 +74,7 @@ A user's thoughts can be interacted with via the following endpoints.
 
 #### `/api/thoughts/:id`
 
-- A **GET** request to this endpoint get's the thought with the ID provided via the request URL `id` parameter.
+- A **GET** request to this endpoint gets the thought with the ID provided via the request URL `id` parameter.
 - A **PUT** request to this endpoint updates the thought with the ID provided via the request URL `id` parameter.
   - the request body `user`, `reactions`, and `thoughtText` property update each respective property of the thought.
 - A **DELETE** request to this endpoint deletes the thought with the ID provided via the request URL `id` parameter.
