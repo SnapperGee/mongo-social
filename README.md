@@ -120,7 +120,7 @@ Below are links showing the type of requests that can be made to the endpoints a
 - DELETE request to delete *User* by ID -> [HERE][delete-user] <-
 - DELETE request to delete *Thought* by ID -> [HERE][delete-thought] <-
 - DELETE request to delete *Reaction* by ID -> [HERE][delete-reaction] <-
-- POST requests to create *User*, *Thought*, and *Reaction* -> [HERE][create-user-thought-and-reaction]<-
+- POST requests to create *User*, *Thought*, and *Reaction* -> [HERE][create-user-thought-and-reaction] <-
 - POST and DELETE requests to add and delete *Friend* from User -> [HERE][add-and-delete-friend] <-
 - PUT request to update *User* -> [HERE][update-user] <-
 - PUT request to update *Thought* -> [HERE][update-thought] <-
