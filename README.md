@@ -2,6 +2,47 @@
 
 Collection of API endpoints for a social network application.
 
+## Schemas
+
+This application uses MongoDB as the database and Mongoose to interact with it as the ODM. The following schemas are
+used to define the data models.
+
+### User model
+
+```typescript
+{
+    username: string; // Required, unique, trimmed, and must be at least 1 character
+    email: string; // Required, unique, and Validated via validator package isEmail(string) method
+    thoughts: Schema.Types.ObjectId[]; // References Thought model
+    friends: Schema.Types.ObjectId[]; // References other users
+}
+```
+
+### Thought model
+
+```typescript
+{
+    thoughtText: string; // Required, must be between 1 and 280 characters
+    user: Schema.Types.ObjectId; // References User model, required. Specifies user Thought is associated with
+    reactions: Reaction[]; // References Reaction schema. Reactions to the Thought form other Users
+    reactionCount: number;
+    createdAt: Date;
+    updatedAt: Date;
+}
+```
+
+### Reaction schema
+
+```typescript
+{
+    reactionId: Schema.Types.ObjectId; // Alias to _id of Reaction document
+    reactionBody: string; // Required, must be between less than 281 characters
+    user: Schema.Types.ObjectId; // References User model, required. Specifies user Reaction is associated with
+    createdAt: Date;
+    updatedAt: Date;
+}
+```
+
 ## Endpoints
 
 ### Users
