@@ -5,7 +5,7 @@ Collection of API endpoints for a social network application.
 ## Schemas
 
 This application uses MongoDB as the database and Mongoose to interact with it as the ODM. The following schemas are
-used to define the data models.
+used.
 
 ### User model
 
